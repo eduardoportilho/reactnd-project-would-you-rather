@@ -21,3 +21,18 @@ export const fetchUsers = () => dispatch => {
     .then(users => dispatch(usersFetched(users)))
     .catch(error => dispatch(errorFetchingUsers(error)))
 }
+
+export const LOGIN = 'LOGIN'
+export function login(user) {
+  return {
+    type: LOGIN,
+    user,
+  }
+}
+
+export const LOGOUT = 'LOGOUT'
+export function logout() {
+  return {
+    type: LOGOUT,
+  }
+}

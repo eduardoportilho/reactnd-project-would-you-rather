@@ -33,20 +33,23 @@ const styles = {
 
 class Login extends Component {
   state = {
-    user: '',
+    userid: '',
   }
 
   onUserChange = event => {
-    this.setState({ user: event.target.value });
+    this.setState({ userid: event.target.value })
   }
 
-  onLogin = event => {
-    const userid = event.target.value
-    //TODO
+  onLoginClick = () => {
+    const { userid } = this.state
+    const { onLogin, users } = this.props
+    const user = users[userid]
+    onLogin(user)
   }
 
   render() {
-    const { classes, users } = this.props;
+    const { userid } = this.state
+    const { classes, users } = this.props
 
     return (
       <div className={classes.wrapper}>
@@ -57,13 +60,13 @@ class Login extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="user">Select User</InputLabel>
               <Select
-                value={this.state.user}
+                value={userid}
                 onChange={this.onUserChange}
                 inputProps={{
                   id: 'user',
                 }}
               >
-                {users.map(user => (
+                {Object.values(users).map(user => (
                   <MenuItem key={user.id} value={user.id}>{user.name}</MenuItem>
                 ))}
               </Select>
@@ -74,7 +77,8 @@ class Login extends Component {
               variant="contained"
               color="primary"
               className={classes.loginButton}
-              onClick={this.onLogin}
+              onClick={this.onLoginClick}
+              disabled={userid === ''}
             >
               Login
             </Button>
