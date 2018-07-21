@@ -40,6 +40,11 @@ class Login extends Component {
     this.setState({ user: event.target.value });
   }
 
+  onLogin = event => {
+    const userid = event.target.value
+    //TODO
+  }
+
   render() {
     const { classes, users } = this.props;
 
@@ -65,7 +70,12 @@ class Login extends Component {
             </FormControl>
           </CardContent>
           <CardActions className={classes.actions}>
-            <Button variant="contained" color="primary" className={classes.loginButton}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.loginButton}
+              onClick={this.onLogin}
+            >
               Login
             </Button>
           </CardActions>

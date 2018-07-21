@@ -9,25 +9,30 @@ class LoginContainer extends Component {
     this.props.fetchUsers()
   }
   render () {
-    const { users, isLoading } = this.props
+    const { users, isLoading, errorFetchingUsers } = this.props
+
+    let loginContent
+    if (errorFetchingUsers) {
+      loginContent = <div>Error: {errorFetchingUsers}</div>
+    } else if (isLoading) {
+      loginContent = <div>Loading...</div>
+    } else {
+      loginContent = <Login users={users} />
+    }
+
     return (
       <div>
-        { isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <Login users={users} />
-        )}
+        { loginContent }
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    users: state.users.userList,
-    isLoading: !state.users.isUsersFetched,
-  }
-}
+const mapStateToProps = state => ({
+  users: state.users.userList,
+  isLoading: !state.users.isUsersFetched,
+  errorFetchingUsers: state.users.errorFetchingUsers,
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers())
