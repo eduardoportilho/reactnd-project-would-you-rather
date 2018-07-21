@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
@@ -31,13 +31,7 @@ const styles = {
   },
 }
 
-const users = [
-  {id: 1, name: 'John'},
-  {id: 2, name: 'Mary'},
-  {id: 3, name: 'Cris'},
-]
-
-class Login extends React.Component {
+class Login extends Component {
   state = {
     user: '',
   }
@@ -47,7 +41,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, users } = this.props;
 
     return (
       <div className={classes.wrapper}>
