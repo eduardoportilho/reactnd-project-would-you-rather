@@ -8,6 +8,9 @@ import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import {
+  Redirect,
+} from "react-router-dom"
 
 const styles = {
   wrapper: {
@@ -49,7 +52,13 @@ class Login extends Component {
 
   render() {
     const { userid } = this.state
-    const { classes, users } = this.props
+    const { users, isLogged, classes } = this.props
+
+    // If the user is logged redirect to the original URL or to home
+    if (isLogged) {
+      const { from } = this.props.location.state || { from: { pathname: "/" } }
+      return <Redirect to={from} />
+    }
 
     return (
       <div className={classes.wrapper}>

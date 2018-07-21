@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { connect } from 'react-redux'
 import { fetchUsers, login } from '../actions'
 import Login from '../components/Login';
@@ -9,14 +8,29 @@ class LoginContainer extends Component {
     this.props.fetchUsers()
   }
   render () {
-    const { users, isLoading, errorFetchingUsers, login } = this.props
+    const { 
+      users,
+      isLoading,
+      errorFetchingUsers,
+      login,
+      isLogged,
+      location, // From Redirect
+    } = this.props
+
     let loginContent
     if (errorFetchingUsers) {
       loginContent = <div>Error: {errorFetchingUsers}</div>
     } else if (isLoading) {
       loginContent = <div>Loading...</div>
     } else {
-      loginContent = <Login users={users} onLogin={login}/>
+      loginContent = (
+        <Login 
+          users={users}
+          onLogin={login}
+          isLogged={isLogged}
+          location={location}
+        />
+      )
     }
 
     return (
@@ -31,6 +45,7 @@ const mapStateToProps = state => ({
   users: state.userInfo.users,
   isLoading: !state.userInfo.isUsersFetched,
   errorFetchingUsers: state.userInfo.errorFetchingUsers,
+  isLogged: state.login.loggedUser !== undefined,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -40,5 +55,5 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LoginContainer)
