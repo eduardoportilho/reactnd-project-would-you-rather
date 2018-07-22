@@ -54,7 +54,7 @@ class Login extends Component {
     const { userid } = this.state
     const { users, isLogged, classes } = this.props
 
-    // If the user is logged redirect to the original URL or to home
+    // If user is logged, redirect she to the original URL or to home
     if (isLogged) {
       const { from } = this.props.location.state || { from: { pathname: "/" } }
       return <Redirect to={from} />
