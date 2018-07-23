@@ -8,9 +8,7 @@ import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
-import {
-  Redirect,
-} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 const styles = {
   wrapper: {

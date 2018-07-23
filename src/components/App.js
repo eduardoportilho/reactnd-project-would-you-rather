@@ -3,21 +3,22 @@ import '../style/App.css'
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
 } from 'react-router-dom'
 
 import LoginContainer from '../containers/LoginContainer'
-import Home from '../components/Home'
-import Dashboard from '../components/Dashboard'
+import MainPage from '../components/MainPage'
+import RouteNotFound from '../components/RouteNotFound'
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path="/" component={Home} />
+        <Switch>
+          <Route exact path="/" component={MainPage} />
           <Route path="/login" component={LoginContainer}/>
-          <Route path="/dashboard" component={Dashboard} />
-        </div>
+          <Route component={RouteNotFound} />
+        </Switch>
       </Router>
     )
   }
